@@ -11,7 +11,7 @@ let num1;
 let num2;
 let lastOp;
 let lastType;
-let isNewNum;
+let isNewInput;
 let isFloat;
 let msgTimeout;
 let opFnMap = Object.create(null);
@@ -48,7 +48,7 @@ keyValMap = {
 setInitValues();
 
 panel.addEventListener("click", onPanelClick);
-document.addEventListener("keyup", onKeyPress);
+document.addEventListener("keyup", onKeyUp);
 
 function onPanelClick(evt) {
   const val = evt.target.value;
@@ -57,7 +57,7 @@ function onPanelClick(evt) {
   makeCalcInput(val, type);
 }
 
-function onKeyPress(evt) {
+function onKeyUp(evt) {
   const key = evt.key;
   const type = NUMS.includes(key)
     ? "num"
@@ -101,9 +101,9 @@ function makeCalcInput(val, type) {
 }
 
 function onNumPress(num) {
-  if (isNewNum) {
+  if (isNewInput) {
     display.value = "";
-    isNewNum = isFloat = false;
+    isNewInput = isFloat = false;
   }
   if (display.value.length >= MAX_INPUT_LENGTH) {
     showBotMsgDebounced(
@@ -153,23 +153,30 @@ function onOpPress(op) {
   }
 
   function processOp() {
-    num2 = null;
+    if (!isNewInput && num2 !== null) {
+      num1 = Number(display.value);
+      num2 = null;
+      lastOp = op;
+      isNewInput = true;
+      return;
+    }
 
     if (num1 === null) {
       num1 = Number(display.value);
       lastOp = op;
-      isNewNum = true;
+      isNewInput = true;
       return;
     }
 
-    if (isNewNum) {
+    if (isNewInput) {
       lastOp = op;
+      num2 = null;
       return;
     }
 
     display.value = num1 = calculate(num1, Number(display.value));
     lastOp = op;
-    isNewNum = true;
+    isNewInput = true;
   }
 
   function calculate(n1, n2) {
@@ -189,7 +196,7 @@ function onOpPress(op) {
     let res;
     if (num2 === null) {
       num2 = Number(display.value);
-    } else if (!isNewNum) {
+    } else if (!isNewInput) {
       num1 = Number(display.value);
     }
     res = calculate(num1, num2);
@@ -197,7 +204,7 @@ function onOpPress(op) {
     display.value = res;
     updateTopDisplay("equals");
     num1 = res;
-    isNewNum = true;
+    isNewInput = true;
   }
 
   function onDel() {
@@ -265,7 +272,7 @@ function setInitValues() {
   num2 = null;
   lastOp = null;
   lastType = null;
-  isNewNum = true;
+  isNewInput = true;
   isFloat = false;
   display.value = "0";
   topDisplay.innerText = "";
