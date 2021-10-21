@@ -57,6 +57,13 @@
   height: 55px;
 }
 
+.focusButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0%;
+}
+
 .calcButtonsInner {
   display: grid;
   grid-template-columns: 48px 48px 48px 48px 48px;

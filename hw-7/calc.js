@@ -6,6 +6,7 @@ const panel = document.querySelector(".calcButtonsInner");
 const display = document.getElementById("calc-display");
 const topDisplay = document.getElementById("calc-display-top");
 const botDisplay = document.getElementById("calc-display-bot");
+const autoFocus = document.getElementById("auto-focus");
 
 let num1;
 let num2;
@@ -54,10 +55,13 @@ function onPanelClick(evt) {
   const val = evt.target.value;
   const type = evt.target.getAttribute("type");
 
+  autoFocus.focus();
+
   makeCalcInput(val, type);
 }
 
 function onKeyUp(evt) {
+  console.log(evt);
   const key = evt.key;
   const type = NUMS.includes(key)
     ? "num"
