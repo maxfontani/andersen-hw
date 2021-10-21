@@ -61,7 +61,6 @@ function onPanelClick(evt) {
 }
 
 function onKeyUp(evt) {
-  console.log(evt);
   const key = evt.key;
   const type = NUMS.includes(key)
     ? "num"
