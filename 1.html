@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andersen Homework</title>
+</head>
+
+<body>
+    <script>
+        const css = `
+            button {
+                align-self: center; 
+                background-color: darkred;
+                border: none; 
+                cursor: pointer;
+                border-radius: 50%;
+                margin: 14px 0;
+                width: 45px; 
+                height: 45px;
+            }
+
+            button:hover {
+                background-color: red;
+            }
+        `
+        const head = document.getElementsByTagName('head')[0];
+        const rootDiv = document.createElement("div");
+        const spanElem = document.createElement("span");
+        const inputElem = document.createElement("input");
+        const btnElem = document.createElement("button");
+        const style = document.createElement('style');
+        const onFatefulClick = function () {
+            spanElem.innerText = "Huston, we've got a problem..";
+            spanElem.style = "font-weight: 700; font-size: 34px"
+            document.body.style.cssText += "background-color: red;";
+            rootDiv.removeChild(btnElem);
+            btnElem.removeEventListener("click", onFatefulClick)
+        }
+
+        rootDiv.setAttribute("id", "root");
+        spanElem.innerText = "Don't push the RED button"
+
+        document.body.appendChild(rootDiv);
+        rootDiv.append(spanElem, btnElem);
+        style.appendChild(document.createTextNode(css))
+        head.appendChild(style);
+
+        document.body.style = "display: flex; justify-content: center;";
+        rootDiv.style = "display: flex; flex-direction: column; justify-content: center; height: 100vh";
+        inputElem.style = "margin: 15px 0px"
+
+        btnElem.addEventListener("click", onFatefulClick);
+    </script>
+
+
+</body>
+
+</html>

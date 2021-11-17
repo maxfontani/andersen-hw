@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andersen Homework</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.13.1/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.9.3/babel.js"></script>
+    <script type="text/babel">
+        const appStyle = {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "100vh",
+        }
+        let btnStyle = {
+            alignSelf: "center",
+            backgroundColor: "darkred",
+            border: "none",
+            cursor: "pointer",
+            borderRadius: 50,
+            margin: 14,
+            width: 45,
+            height: 45,
+        };
+        const spanStyle = {
+            textAlign: "center",
+            fontSize: 18,
+        };
+
+
+        function onBtnClick() {
+            ReactDOM.render(hope, document.getElementById("root"))
+        }
+
+        const app = (
+            <div className="app" style={appStyle}>
+                <span style={spanStyle}>Trust me, it's safe to push the RED button.. </span>
+                <button style={btnStyle} onClick={onBtnClick}></button>
+            </div>
+        )
+
+        const hope = (
+            <div className="app" style={appStyle}>
+                <span style={spanStyle}>Huston is fine, for now..</span>
+            </div>
+        )
+
+        ReactDOM.render(app, document.getElementById("root"))
+    </script>
+</body>
+
+</html>

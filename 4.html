@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andersen Homework</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.13.1/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.9.3/babel.js"></script>
+    <script type="text/babel">
+
+        const divStyle = {
+            display: "flex",
+            fontSize: 18,
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "100vh",
+        };
+        const doomStyle = Object.assign({}, divStyle, {
+            backgroundColor: "red",
+            fontSize: 38,
+        });
+        const btnStyle = {
+            alignSelf: "center",
+            backgroundColor: "darkred",
+            border: "none",
+            cursor: "pointer",
+            borderRadius: 50,
+            margin: 14,
+            width: 45,
+            height: 45,
+        };
+        const spanStyle = {
+            textAlign: "center",
+        };
+
+        const styles = {
+            btnStyle,
+            divStyle,
+            doomStyle,
+            spanStyle,
+        }
+
+        function App() {
+            return (
+                <div className="app">
+                    <Huston styles={styles} />
+                </div>
+            );
+        }
+
+        function Huston({ styles }) {
+            let [areDoomed, setAreDoomed] = React.useState(false);
+            const text = areDoomed ? "Huston, we've got a problem.." : "Don't push the RED button"
+            const divTheme = areDoomed ? styles.doomStyle : styles.divStyle;
+            const display = areDoomed ? "none" : "inline-block";
+
+            function onBtnClick() {
+                setAreDoomed(true);
+            }
+
+            return (
+                <div className="huston" style={divTheme}>
+                    <span style={styles.spanStyle}>{text}</span>
+                    <button style={{ ...styles.btnStyle, display }} onClick={onBtnClick}></button>
+                </div >
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById("root"))
+    </script>
+</body>
+
+</html>

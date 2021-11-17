@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andersen Homework</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.13.1/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js"></script>
+    <script>
+        const q = React.createElement;
+
+        const divStyle = {
+            display: "flex",
+            fontSize: 18,
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "100vh",
+        };
+        const doomStyle = Object.assign({}, divStyle, {
+            backgroundColor: "red",
+            fontSize: 38,
+        });
+        const btnStyle = {
+            alignSelf: "center",
+            backgroundColor: "darkred",
+            border: "none",
+            cursor: "pointer",
+            borderRadius: 50,
+            margin: 14,
+            width: 45,
+            height: 45,
+        };
+        const spanStyle = {
+            textAlign: "center",
+        };
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { text: "Don't push the RED button", areDoomed: false };
+                this.onBtnClick = this.onBtnClick.bind(this);
+            }
+
+            onBtnClick = function () {
+                this.setState({ text: "Huston, we've got a problem..", areDoomed: true });
+            };
+
+            render() {
+                return q(
+                    "div",
+                    { className: "app" },
+                    q(
+                        Huston,
+                        {
+                            text: this.state.text,
+                            showBtn: !this.state.areDoomed,
+                            onBtnClick: this.onBtnClick,
+                        },
+                        null
+                    )
+                );
+            }
+        }
+
+        class Huston extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+            render() {
+                return q(
+                    "div",
+                    {
+                        className: "huston",
+                        style: this.props.showBtn ? divStyle : doomStyle,
+                    },
+                    q("span", { style: spanStyle }, this.props.text),
+                    this.props.showBtn &&
+                    q(
+                        "button",
+                        {
+                            style: btnStyle,
+                            onClick: this.props.onBtnClick,
+                        },
+                        null
+                    )
+                );
+            }
+        }
+
+        ReactDOM.render(q(App, null, null), document.getElementById("root"));
+
+    </script>
+</body>
+
+</html>
