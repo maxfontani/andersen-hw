@@ -1,0 +1,16 @@
+.appOuter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+#app-form {
+  margin: 25px 0;
+  border: 2px solid black;
+  border-radius: 7px;
+  padding: 15px;
+  background-color: #ddd;
+}
